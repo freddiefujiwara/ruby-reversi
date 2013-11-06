@@ -25,6 +25,29 @@ describe Reversi do
               @reversi.board[y][x].should == :wall
             end
         end
+        @reversi.board[4][4].should == :white
+        @reversi.board[5][5].should == :white
+        @reversi.board[4][5].should == :black
+        @reversi.board[5][4].should == :black
+    end
+  end
+  context "Reversi.to_s" do
+    subject { @reversi.to_s }
+    its(:length) { should == 100 + 10 } # pos + \n
+  end
+  context "Reversi.put" do
+    subject { @reversi }
+    it do
+        @reversi.put :white, 4,6
+        @reversi.board[6][4].should == :white
+    end
+    it do
+        @reversi.put :black, 4,4
+        @reversi.board[4][4].should == :white
+    end
+    it do
+        lambda{ @reversi.put :black, 100,100 }.should_not raise_error
+        puts @reversi
     end
   end
 end
