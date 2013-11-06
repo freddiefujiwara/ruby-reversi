@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby/reversi/version'
+require 'reversi/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby-reversi"
-  spec.version       = Ruby::Reversi::VERSION
+  spec.name          = "reversi"
+  spec.version       = Reversi::VERSION
   spec.authors       = ["Freddie Fujiwara"]
   spec.email         = ["github@ze.gs"]
   spec.description   = %q{TODO: Write a gem description}
