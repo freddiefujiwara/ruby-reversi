@@ -73,18 +73,20 @@ class Reversi
         #north east
         paths << [(size - y - 1),(x - 2)].min.times.map{ |i| {:x => x - i - 1, :y => y + i + 1} }
 
+        walks = []
         paths.each do |path|
             walk = []
             path.each do |xy|
                 walk << xy
-                if @board[xy[:y]][xy[:x]] == color
-                    walk.each do |pos|
-                        @board[pos[:y]][pos[:x]] = color
-                    end
+                if color == @board[xy[:y]][xy[:x]]
+                    walks << walk
                     break
                 end
-                break if @board[xy[:y]][xy[:x]] == " "
+                break if " " == @board[xy[:y]][xy[:x]]
             end
+        end
+        walks.flatten.each do |pos|
+            @board[pos[:y]][pos[:x]] = color
         end
     end
 end

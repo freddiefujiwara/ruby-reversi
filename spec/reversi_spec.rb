@@ -89,9 +89,7 @@ describe Reversi do
         @reversi.reverse "B", 3,6
 
         @reversi.reverse "W", 4,3
-        puts @reversi
         @reversi.reverse "B", 6,2
-        puts @reversi
     end
   end
 end
