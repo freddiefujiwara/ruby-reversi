@@ -9,11 +9,11 @@ class Reversi
         @board.each_with_index do |arr,y|
             @board[y] = Array.new size + 2
             @board[y].each_with_index do |arr,x|
-                if 0 == y or size + 1 == y or 0 == x or size + 1 == x
+                if 0 == y or size + 1 == y or 0 == x  or size + 1 == x
                     @board[y][x] = "#"
-                elsif (size/2 == y and size/2   == x)   or (size/2+1 == y and size/2+1 == x)
+                elsif (size/2 == y and size/2   == x) or (size/2+1 == y and size/2+1 == x)
                     @board[y][x] = "W"
-                elsif (size/2 == y and size/2+1 == x)   or (size/2+1 == y and size/2   == x)
+                elsif (size/2 == y and size/2+1 == x) or (size/2+1 == y and size/2   == x)
                     @board[y][x] = "B"
                 else
                     @board[y][x] = " "
@@ -24,7 +24,7 @@ class Reversi
 
     def to_s
         str = ""
-        @board.each_with_index do |arr,y|
+        (0 .. size.length -1 ).each do |arr,y|
             @board[y].each_with_index do |arr,x|
                 str << @board[y][x]
             end
