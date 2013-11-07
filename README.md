@@ -1,4 +1,4 @@
-# Ruby::Reversi
+# Reversi
 
 TODO: Write a gem description
 
