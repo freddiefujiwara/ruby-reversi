@@ -35,27 +35,24 @@ describe Reversi do
     subject { @reversi.to_s }
     its(:length) { should == 100 + 10 } # pos + \n
   end
-  context "Reversi.put" do
-    subject { @reversi }
-    it do
-        @reversi.put "W", 4,6
-        @reversi.board[6][4].should == "W"
-    end
-    it do
-        @reversi.put "B", 4,4
-        @reversi.board[4][4].should == "W"
-    end
-    it do
-        lambda{ @reversi.put "B", 100,100 }.should_not raise_error
-    end
-  end
   context "Reversi.reverse" do
     subject { @reversi }
     it do
-        @reversi.reverse "W", 5,3
-        (3..5).each do |y|
-            @reversi.board[y][5].should == "W"
-        end
+        @reversi.reverse "W", 4,6
+        @reversi.board[6][4].should == "W"
+    end
+    it do
+        @reversi.reverse "B", 4,4
+        @reversi.board[4][4].should == "W"
+    end
+    it do
+        lambda{ @reversi.reverse "B", 100,100 }.should_not raise_error
+    end
+    it do
+        expected_walk = []
+        expected_walk << {:x => 5, :y => 4}
+        expected_walk.sort_by!{ |pos| pos[:x] }.sort_by!{ |pos| pos[:y] }
+        @reversi.reverse("W", 5,3).should == expected_walk
 
         @reversi.reverse "B", 5,2
         @reversi.reverse "B", 5,6
@@ -80,23 +77,27 @@ describe Reversi do
             @reversi.board[4][x].should == "B"
         end
 
-        @reversi.reverse "W", 2,3
-        @reversi.board[4][3].should == "W"
-        @reversi.board[5][4].should == "W"
+        expected_walk  = [
+            {:x => 3, :y => 4},
+            {:x => 4, :y => 5}
+        ].sort_by!{ |pos| pos[:x] }.sort_by!{ |pos| pos[:y] }
+        @reversi.reverse("W", 2,3).should == expected_walk
 
-        @reversi.reverse "W", 7,5
-        @reversi.board[5][5].should == "W"
-        @reversi.board[5][6].should == "W"
-        @reversi.board[4][6].should == "W"
+        expected_walk  = [
+            {:x => 5, :y => 5},
+            {:x => 6, :y => 5},
+            {:x => 6, :y => 4}
+        ].sort_by!{ |pos| pos[:x] }.sort_by!{ |pos| pos[:y] }
+        @reversi.reverse("W", 7,5).should == expected_walk
 
-        @reversi.reverse "B", 3,6
-        @reversi.board[5][4].should == "B"
+        expected_walk  = [{:x => 4, :y => 5}].sort_by!{ |pos| pos[:x] }.sort_by!{ |pos| pos[:y] }
+        @reversi.reverse("B", 3,6).should == expected_walk
 
-        @reversi.reverse "W", 4,3
-        @reversi.board[4][5].should == "W"
+        expected_walk  = [{:x => 5, :y => 4}].sort_by!{ |pos| pos[:x] }.sort_by!{ |pos| pos[:y] }
+        @reversi.reverse("W", 4,3).should == expected_walk
 
-        @reversi.reverse "B", 6,2
-        @reversi.board[3][5].should == "B"
+        expected_walk  = [{:x => 5, :y => 3}].sort_by!{ |pos| pos[:x] }.sort_by!{ |pos| pos[:y] }
+        @reversi.reverse("B", 6,2).should == expected_walk
     end
   end
 end

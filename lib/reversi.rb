@@ -38,13 +38,6 @@ class Reversi
         str
     end
 
-    def put(color,x,y)
-        return unless 1 <= x and x <= @size
-        return unless 1 <= y and y <= @size
-        return unless @board[y][x] == " "
-        @board[y][x] = color
-    end
-
     def reverse(color,x,y)
         # filters
         return unless 1 <= x and x <= @size
@@ -77,16 +70,17 @@ class Reversi
         paths.each do |path|
             walk = []
             path.each do |xy|
-                walk << xy
                 if color == @board[xy[:y]][xy[:x]]
                     walks << walk
                     break
                 end
                 break if " " == @board[xy[:y]][xy[:x]]
+                walk << xy
             end
         end
         walks.flatten.each do |pos|
             @board[pos[:y]][pos[:x]] = color
         end
+        walks.flatten.sort_by{ |pos| pos[:x] }.sort_by{ |pos| pos[:y] }
     end
 end
