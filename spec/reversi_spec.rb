@@ -85,11 +85,18 @@ describe Reversi do
         @reversi.board[5][4].should == "W"
 
         @reversi.reverse "W", 7,5
+        @reversi.board[5][5].should == "W"
+        @reversi.board[5][6].should == "W"
+        @reversi.board[4][6].should == "W"
 
         @reversi.reverse "B", 3,6
+        @reversi.board[5][4].should == "B"
 
         @reversi.reverse "W", 4,3
+        @reversi.board[4][5].should == "W"
+
         @reversi.reverse "B", 6,2
+        @reversi.board[3][5].should == "B"
     end
   end
 end
